@@ -1,0 +1,97 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
+<link rel="import" href="../bower_components/google-youtube/google-youtube.html">
+
+<link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../paper-dialog-behavior.html">
+<link rel="import" href="../paper-dialog-shared-styles.html">
+
+<!--
+  Simple yet informative 404 page.
+-->
+<dom-module id="th-help">
+  <template>
+    <style>
+      :host {
+        display: block;
+        text-align: left;
+        margin-left: 10px;
+        padding: 10px 20px;
+      }
+
+      .mid {
+      margin-left: 5px;
+      margin-top: 20px;
+      margin-right: 100px;
+    }
+
+    .heading {
+      text-align: left;
+    }
+
+      h3 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        margin: var(--app-unit-sm);
+        font-size: var(--app-unit-xl);
+      }
+
+      h3 iron-icon {
+        width: var(--app-unit-xl);
+        height: var(--app-unit-xl);
+
+        transform: translateY(5px);
+      }
+    </style>
+
+
+    <p>
+      Overview data is updated daily and so activity from the last 24 hours may not be displayed. <a href="/">Head back to home.</a>
+    </p>
+
+    <!--<div>Hello from <span>{{foo}}</span></div>-->
+  <h2>Действия пользователей</h2>
+    <paper-material class="mid" elevation="1">
+      <google-youtube
+        class="yt"
+        video-id="EmI8krZboGY"
+        height="270px"
+        width="480px"
+        rel="0"
+        start="5"
+        autoplay="0">
+      </google-youtube>
+      <paper-material>
+      </paper-material>
+<iron-image src="/images/actions-map.png"></iron-image>
+    </paper-material>
+
+
+    <!--
+      задняя белая вставка
+    -->
+    <template>
+      <style include="paper-dialog-shared-styles"></style>
+      <slot></slot>
+    </template>
+
+
+
+
+
+
+    <br>
+    <br>
+    <br>
+
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'th-help'
+    });
+  </script>
+</dom-module>

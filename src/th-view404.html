@@ -1,0 +1,135 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-material/paper-material.html">
+
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-dialog-behavior/paper-dialog-behavior.html">
+<link rel="import" href="../bower_components/paper-dialog-behavior/paper-dialog-shared-styles.html">
+
+<!--
+  Simple yet informative 404 page.
+-->
+<dom-module id="th-view404">
+  <template>
+    <style>
+      :host {
+        display: block;
+        text-align: left;
+        margin-left: 10px;
+        padding: 10px 20px;
+      }
+
+      .mid {
+      margin-left: 5px;
+      margin-top: 20px;
+      margin-right: 100px;
+    }
+
+    .heading {
+      text-align: left;
+    }
+
+      h3 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        margin: var(--app-unit-sm);
+        font-size: var(--app-unit-xl);
+      }
+
+      h3 iron-icon {
+        width: var(--app-unit-xl);
+        height: var(--app-unit-xl);
+
+        transform: translateY(5px);
+      }
+    </style>
+
+
+
+
+    <!--<div>Hello from <span>{{foo}}</span></div>-->
+  <h2>HELP</h2>
+    <paper-material class="mid" elevation="1">
+      <google-youtube
+        class="yt"
+        video-id="EmI8krZboGY"
+        height="270px"
+        width="480px"
+        rel="0"
+        start="5"
+        autoplay="0">
+      </google-youtube>
+
+
+
+
+
+    </paper-material>
+
+    <h4>Welcome to your limited edition Tsugi,
+    which comes with one-of-a-kind digital experiences stitched
+     into the fabric of the jacket.<br>
+     <br>
+     Use your smartphone to connect with smart tags hidden in your jacket sleeve,
+     giving you exclusive access to all of the experiences and gifts that come with your Tsugi.
+   </h4><br>
+
+    <!--
+      задняя белая вставка
+    -->
+    <template>
+      <style include="paper-dialog-shared-styles"></style>
+      <slot></slot>
+    </template>
+
+
+
+
+    <h2>NFC</h2>
+
+    <h4>Check your phone settings to make sure that NFC is turned on.
+      Tap the back of your NFC-enabled phone against the V. embellishment ‘bull’s-eye’ mark on
+       the left sleeve of the jacket,
+      (it’s like using a phone to make a contact-less payment in stores).<br>
+     <br>
+    Once in position, the reader will automatically trigger allowing you
+    to access your personal digital experience.
+   </h4><br>
+
+    <iron-image src="/images/help-nfc.png"></iron-image>
+
+
+<br>
+<br>
+<br>
+  <h2>QR</h2>
+  <h4>For iphones and mobiles that won’t work with the NFC tag, unzip the hidden pocket on the left sleeve of
+    your jacket and pull out the label containing your personalized QR-code.<br>
+   <br>
+  Pull out label and scan QR code.
+  </h4><br>
+
+    <iron-image src="/images/help-qr.png"></iron-image>
+<br>
+<br>
+
+  <h2>CARE</h2>
+  <h4>The QR-code on the label inside the sleeve pocket is washable, but the NFC tag is not.
+    Please remove this label from the sleeve pocket before you wash or dry-clean your jacket.<br>
+  </h4><br>
+
+
+
+
+<br>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'th-view404'
+    });
+  </script>
+</dom-module>

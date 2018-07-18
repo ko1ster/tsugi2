@@ -1,0 +1,19 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/th-app.html",
+  "fragments": [
+    "src/th-goods.html",
+    "src/th-batches.html",
+    "src/th-settings.html",
+    "src/th-view404.html"
+  ],
+  "sourceGlobs": [
+   "src/**/*",
+   "images/**/*",
+   "bower.json"
+  ],
+  "includeDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  ]
+}

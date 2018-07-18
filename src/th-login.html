@@ -1,0 +1,213 @@
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../bower_components/paper-styles/paper-styles-classes.html">
+
+<link rel="import" href="../bower_components/neon-animation/neon-animation.html">
+
+<link rel="import" href="shared-styles.html">
+<link rel="import" href="th-loader.html">
+
+<!--
+  Login splash screen, visible when app is not ready,
+  e.g. in loading state, or have no authenticated user available.
+
+  Overlays the whole screen.
+-->
+<dom-module id="th-login">
+  <template>
+    <style include="iron-flex">
+      :host {
+
+        @apply(--layout-fit);
+        @apply(--layout-center-center);
+
+        position: fixed;
+
+        z-index: 103;
+        background:var(--paper-indigo-200);
+
+      }
+
+      #loginForm {
+        max-width: 400px;
+        width: 90vw;
+      }
+
+      paper-fab.facebook {
+        color: black;
+        background: #00FFFA;
+      }
+
+      paper-button {
+        margin-right: 45%;
+      }
+
+      paper-header-panel {
+         float: center;
+         width: 270px;
+         height: 240px;
+         margin: 43%;
+         @apply --shadow-elevation-1dp;
+       }
+
+       [slot=header] {
+          height: 80px;
+          font-size: 16px;
+          line-height: 60px;
+          padding: 0 10px;
+          color: white;
+          transition: height 0.2s;
+        }
+
+        [slot=header].tall {
+         height: 120px;
+       }
+       [slot=header].medium-tall {
+         height: 100px;
+         line-height: 50px;
+       }
+       .content {
+         height: 2000px;
+       }
+       .cover {
+         margin: 60px;
+       }
+
+    </style>
+
+<br>
+    <app-header-layout id="appHeader" centerAlign has-scrolling-region>
+      <app-header centerAlign>
+  <paper-header-panel>
+    <a href="http://thevitl.xyz/"><img src="http://vitl.xyz/wp-content/uploads/2018/07/vitl_f_logo.png" alt="VITL" sizing="cover"></iron-image></a>
+</paper-header-panel>
+      </app-header>
+    </app-header-layout>
+
+
+
+
+    <paper-dialog modal id="loginForm" entry-animation="scale-up-animation" exit-animation="fade-out-animation">
+      <style>
+        .buttons {
+          margin-top: 32px !important;
+          margin-bottom: 8px !important;
+        }
+      </style>
+
+      <h2><center>Manage  your clothes</center></h2>
+      <form name="th-login-form">
+        <paper-input label="Email" value="{{creds.email}}"></paper-input>
+        <paper-input label="Password" type="password" value="{{creds.password}}"></paper-input>
+        <left><div class="buttons layout horizontal"></left>
+          <span class="flex"></span>
+
+          <paper-button raised class="custom indigo" type="submit" noink on-tap="_loginWithCreds">LOG IN</paper-button>
+
+          <style is="custom-style">
+  paper-button.custom {
+    --paper-button-ink-color: var(--paper-pink-a200);
+    /* These could also be individually defined for each of the
+      specific css classes, but we'll just do it once as an example */
+    --paper-button-flat-keyboard-focus: {
+      background-color: var(--paper-pink-a200);
+      color: white !important;
+    };
+    --paper-button-raised-keyboard-focus: {
+      background-color: var(--paper-pink-a200) !important;
+      color: white !important;
+    };
+  }
+  paper-button.custom:hover {
+    background-color: var(--paper-indigo-500);
+  }
+  paper-button.pink {
+    color: var(--paper-pink-a200);
+
+  }
+  paper-button.indigo {
+    background-color: var(--paper-purple-300);
+    color: white;
+    --paper-button-raised-keyboard-focus: {
+      background-color: var(--paper-pink-a200) !important;
+      color: white !important;
+    };
+  }
+  </style>
+
+        </div>
+      </form>
+    </paper-dialog>
+
+    <iron-localstorage name="th-creds" value="{{creds}}" on-iron-localstorage-load-empty="_setDefaultCreds"></iron-localstorage>
+
+    <th-loader hidden$="{{!loading}}" size="80px"></th-loader>
+  </template>
+  <script>
+    Polymer({
+      is: 'th-login',
+
+      properties: {
+        /**
+         * Defines if loader visible
+         */
+        loading: {
+          type: Boolean,
+          value: true
+        },
+
+        /**
+         * Stores creds before dispatching them in event
+         */
+        creds: {
+          type: Object,
+          value: {}
+        }
+      },
+
+      /**
+       * Opens login modal, allowing to login either with User creds
+       * or via facebook.
+       */
+      open: function() {
+        this.$.loginForm.open();
+      },
+
+      /**
+       * Closes modal
+       */
+      close: function() {
+        this.$.loginForm.close();
+      },
+
+      /**
+       * Sets 'login with facebook' button visibility based on given
+       * boolean
+       */
+      setFacebookAvailable: function(isFacebookAvailable) {
+        this.$.facebookLogin.style.visibility = isFacebookAvailable ? 'visible' : 'hidden';
+      },
+      /**
+       * Dispatches login with given creds
+       *
+       * @private
+       */
+      _loginWithCreds: function() {
+        this.fire('login', this.creds);
+      },
+
+      /**
+       * Dispatches login with facebook
+       *
+       * @private
+       */
+      _loginWithFacebook: function() {
+        this.fire('login', 'facebook');
+      }
+    });
+    </script>
+    </dom-module>
